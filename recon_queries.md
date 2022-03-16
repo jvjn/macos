@@ -51,3 +51,55 @@ WHERE o. IS NULL
    OR a. IS NULL
    OR a. IS NULL
 ```
+
+```sql
+WITH original AS (
+    SELECT 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+     --SHOW COLUMNS
+    FROM hive.scratch.oooooooooo
+    WHERE tttttttttt < DATE '2022-03-01'
+)
+
+, altered AS (
+    SELECT 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         , 
+         --SHOW COLUMNS
+    FROM hive.scratch.aaaaaaaaaa
+    WHERE tttttttttt < DATE '2022-03-01'
+)
+
+SELECT o.
+     , o.
+     , o.
+     , a.
+     , a.
+     , a.
+FROM original AS o
+INNER JOIN altered AS a
+    ON o. = a.
+    AND o. = a.
+    AND o. = a.
+WHERE o. <> a.
+   OR o. <> a.
+   OR o. <> a.
+   OR o. <> a.
+```
