@@ -1,6 +1,6 @@
 # macos
 
-#.zshrc
+# .zshrc
 
 ```
 export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
@@ -31,3 +31,8 @@ source $ZSH/oh-my-zsh.sh
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
 ```
+
+
+# nightlight
+
+brew install smudge/smudge/nightlight
