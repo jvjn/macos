@@ -1,0 +1,27 @@
+
+export ZSH="$HOME/.oh-my-zsh"
+
+export GCLOUD_DEFAULT_ACCOUNT="jonathan.norton@shopify.com"
+export GCLOUD_DEFAULT_PROJECT="sdp-stg-financial-services"
+export GCLOUD_DEFAULT_PROD_PROJECT="sdp-prd-financial-services"
+
+# Define your Vertex AI Workbench instances and their locations
+typeset -A WB_INSTANCES
+WB_INSTANCES=(
+  jn1 "us-west1-a"
+  jvjn-ml-1 "us-central1-a"
+  jvjn-ml-2 "us-central1-a"
+  jvjn-ml-3 "us-central1-a"
+  jvjn-ml-4 "us-central1-a"
+  jvjn-ml-5 "us-central1-a"
+  jvjn-ml-6 "us-central1-a"
+  jvjn-ml-7 "us-central1-a"
+  ec-ml-4-gpu "us-west1-a"
+)
+
+plugins=(git gcloud macos sublime gcloud-vertex-workbench)
+
+source $ZSH/oh-my-zsh.sh
+
+# Added by tec agent
+[[ -x /Users/jn/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/jn/.local/state/tec/profiles/base/current/global/init zsh)"
