@@ -174,28 +174,17 @@ wb-ssh() {
     return 1
   fi
   
-  echo "🔌 Getting compute instance details for $instance_name..."
-  
-  # Get the underlying GCE instance name and zone
-  local gce_instance=$(gcloud workbench instances describe "$instance_name" \
-    --location="$location" \
-    --format="value(gceSetup.vmImage.name)" 2>/dev/null)
-  
-  # If the above doesn't work, try getting it from the instance metadata
-  if [ -z "$gce_instance" ]; then
-    gce_instance=$(gcloud workbench instances describe "$instance_name" \
-      --location="$location" \
-      --format="value(name)" 2>/dev/null)
+  if [ -z "$GCLOUD_DEFAULT_PROJECT" ]; then
+    echo "❌ Error: GCLOUD_DEFAULT_PROJECT environment variable is not set"
+    echo "Please set it in your ~/.zshrc: export GCLOUD_DEFAULT_PROJECT=\"your-project-id\""
+    return 1
   fi
   
-  if [ -z "$gce_instance" ]; then
-    echo "❌ Error: Could not determine compute instance name"
-    echo "Attempting direct connection with instance name..."
-    gce_instance="$instance_name"
-  fi
-  
-  echo "🔌 Connecting to compute instance: $gce_instance in zone $location..."
-  gcloud compute ssh "$gce_instance" --zone="$location"
+  echo "🔌 Connecting to $instance_name via IAP tunnel..."
+  gcloud compute ssh "$instance_name" \
+    --project="$GCLOUD_DEFAULT_PROJECT" \
+    --zone="$location" \
+    --tunnel-through-iap
 }
 
 # List configured instances
