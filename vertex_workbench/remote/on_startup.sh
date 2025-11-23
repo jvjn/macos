@@ -1,5 +1,53 @@
 #!/bin/bash
 
+# ============================================================================
+# Vertex AI Workbench Startup Script
+# ============================================================================
+#
+# PURPOSE:
+#   This script configures a Vertex AI Workbench instance with zsh, oh-my-zsh,
+#   and custom settings for all users. It runs automatically at instance startup.
+#
+# SETUP INSTRUCTIONS:
+#   1. Upload this script to a Google Cloud Storage (GCS) bucket:
+#      gsutil cp on_startup.sh gs://your-bucket-name/startup-scripts/
+#
+#   2. When creating a Workbench instance, specify this script in the startup
+#      script configuration:
+#      - Via Console: Under "Advanced Options" → "Startup script" → 
+#        Enter the GCS path: your-bucket-name/startup-scripts/on_startup.sh
+#      - Via gcloud CLI: Use the --metadata flag:
+#        gcloud workbench instances create INSTANCE_NAME \
+#          --location=LOCATION \
+#          --metadata="startup-script-url=gs://your-bucket-name/startup-scripts/on_startup.sh"
+#
+#   3. The script will automatically download and execute on every instance start.
+#
+# IMPORTANT CAVEAT - First Remote Connection:
+#   If you plan to connect remotely via CLI or Cursor (using SSH over IAP),
+#   you MUST restart the instance after your first connection.
+#
+#   Why? Vertex Workbench instances accessed via IAP create the user's home 
+#   directory only AFTER the first remote connection. This script runs at 
+#   startup before the user directory exists, so zsh setup for remote users 
+#   won't complete until after the first connection + restart cycle.
+#
+#   Workflow:
+#     1. Create instance with this startup script
+#     2. Connect via SSH/Cursor for the first time (user directory gets created)
+#     3. Restart the instance: wb-restart INSTANCE_NAME
+#     4. On next connection, zsh will be fully configured
+#
+# WHAT THIS SCRIPT DOES:
+#   - Installs zsh, git, and curl
+#   - Configures oh-my-zsh for all users (jupyter + any IAP users)
+#   - Installs zsh plugins: autosuggestions, syntax-highlighting
+#   - Sets JupyterLab terminal to use zsh
+#   - Sets JupyterLab theme to dark mode
+#   - Configures proper permissions for multi-user access
+#
+# ============================================================================
+
 echo "🔧 Installing zsh and oh-my-zsh..."
 
 # Install zsh
@@ -51,7 +99,7 @@ setup_zsh_for_user() {
         # Still fix permissions if already exists
         chmod -R g-w "/home/$username/.oh-my-zsh"
     fi
-        
+
     # Change theme to fox
     su - "$username" -c "sed -i 's/ZSH_THEME=\".*\"/ZSH_THEME=\"fox\"/' ~/.zshrc"
     
