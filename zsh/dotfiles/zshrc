@@ -8,6 +8,7 @@ export GCLOUD_DEFAULT_PROD_PROJECT="sdp-prd-financial-services"
 # Define your Vertex AI Workbench instances and their locations
 typeset -A WB_INSTANCES
 WB_INSTANCES=(
+  jndev "us-west1-a"
   jn1 "us-west1-a"
   jvjn-ml-1 "us-central1-a"
   jvjn-ml-2 "us-central1-a"

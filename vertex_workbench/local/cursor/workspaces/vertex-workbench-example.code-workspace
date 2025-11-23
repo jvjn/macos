@@ -1,0 +1,24 @@
+{
+    "folders": [
+        {
+            "uri": "vscode-remote://ssh-remote+<AUTO_GENERATED_KEY_FROM_SAVING_WORKSPACE_MANUALLY>/home/jupyter"
+        }
+    ],
+    "remoteAuthority": "ssh-remote+<AUTO_GENERATED_KEY_FROM_SAVING_WORKSPACE_MANUALLY>",
+    "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/bin/python",
+        "python.pythonPath": "/opt/conda/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "python.terminal.activateEnvInCurrentTerminal": true,
+        "remote.SSH.defaultExtensions": [
+            "ms-python.python",
+            "ms-toolsai.jupyter"
+        ]
+    },
+    "extensions": {
+    "recommendations": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+    ]
+    }
+}

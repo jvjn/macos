@@ -1,0 +1,14 @@
+# This is an example of what the ssh config entries should look like for ssh into a vertex workbench instance
+Host jvjn-ml-1
+    HostName compute.jvjn-ml-1
+    User jonathan_norton_shopify_com
+    IdentityFile ~/.ssh/google_compute_engine
+    ProxyCommand gcloud compute start-iap-tunnel jvjn-ml-1 %p --listen-on-stdin --project=sdp-stg-financial-services --zone=us-central1-a
+    StrictHostKeyChecking no
+
+Host jn1
+    HostName compute.jn1
+    User jonathan_norton_shopify_com
+    IdentityFile ~/.ssh/google_compute_engine
+    ProxyCommand gcloud compute start-iap-tunnel jn1 %p --listen-on-stdin --project=sdp-stg-financial-services --zone=us-west1-a
+    StrictHostKeyChecking no

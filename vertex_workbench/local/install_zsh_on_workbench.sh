@@ -1,4 +1,5 @@
 #!/bin/bash
+# Execute this script via cursor's terminal when you are remoted into a vertex workbench instance
 
 set -e
 
@@ -29,6 +30,13 @@ sed -i 's/ZSH_THEME=".*"/ZSH_THEME="fox"/' ~/.zshrc
 echo "🔌 Configuring plugins..."
 sed -i 's/plugins=(git)/plugins=(git docker kubectl python pip zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
 
+# Set default directory to /home/jupyter
+echo "📁 Setting default directory to /home/jupyter..."
+echo '
+# Set default directory
+cd /home/jupyter
+' >> ~/.zshrc
+
 # Configure bash to auto-start zsh
 echo "🔧 Configuring auto-start..."
 if ! grep -q "exec zsh" ~/.bashrc; then
@@ -41,8 +49,21 @@ fi
 ' >> ~/.bashrc
 fi
 
+# Configure VS Code/Cursor Python settings
+#echo "🐍 Configuring Python settings for Cursor/VS Code..."
+#mkdir -p /home/jupyter/.vscode
+#cat > /home/jupyter/.vscode/settings.json << 'EOF'
+#{
+#    "python.defaultInterpreterPath": "/opt/conda/bin/python",
+#    "python.pythonPath": "/opt/conda/bin/python",
+#    "python.terminal.activateEnvironment": true,
+#    "python.terminal.activateEnvInCurrentTerminal": true
+#}
+#EOF
+
 echo "✅ Installation complete!"
 echo "Theme: fox"
 echo "Plugins: git, docker, kubectl, python, pip, zsh-autosuggestions, zsh-syntax-highlighting"
+echo "Python interpreter: /opt/conda/bin/python"
 echo ""
 echo "⚠️  Please restart your terminal or run: source ~/.bashrc"

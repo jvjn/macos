@@ -57,7 +57,8 @@ wb-start() {
   fi
   
   echo "🚀 Starting $instance_name in $location..."
-  gcloud workbench instances start "$instance_name" --location="$location"
+  gcloud workbench instances start "$instance_name" --location="$location" --quiet \
+  && echo "✅ Started $instance_name in $location"
 }
 
 # Stop workbench instance
@@ -79,7 +80,20 @@ wb-stop() {
   fi
   
   echo "🛑 Stopping $instance_name in $location..."
-  gcloud workbench instances stop "$instance_name" --location="$location"
+  gcloud workbench instances stop "$instance_name" --location="$location" --quiet \
+  && echo "✅ Stopped $instance_name in $location"
+}
+
+# Restart workbench instance
+wb-restart() {
+  local instance_name=$1
+  if [ -z "$instance_name" ]; then
+    echo "Usage: wb-restart INSTANCE_NAME"
+    return 1
+  fi
+  
+  echo "🔄 Restarting $instance_name..."
+  wb-stop "$instance_name" && wb-start "$instance_name"
 }
 
 # Get instance status
