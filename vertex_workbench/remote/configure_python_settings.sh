@@ -23,3 +23,12 @@ echo ""
 echo "These settings will persist across VM restarts."
 echo "Reconnect to the instance in Cursor to apply the changes."
 
+
+# Create settings.json
+mkdir .vscode
+cat > .vscode/settings.json << 'EOF'
+{
+    "python.defaultInterpreterPath": "/opt/conda/bin/python",
+    "python.pythonPath": "/opt/conda/bin/python",
+}
+EOF

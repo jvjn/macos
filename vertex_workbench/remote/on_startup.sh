@@ -42,6 +42,7 @@
 #   - Installs zsh, git, and curl
 #   - Configures oh-my-zsh for all users (jupyter + any IAP users)
 #   - Installs zsh plugins: autosuggestions, syntax-highlighting
+#   - Initializes conda and activates base environment automatically
 #   - Sets JupyterLab terminal to use zsh
 #   - Sets JupyterLab theme to dark mode
 #   - Configures proper permissions for multi-user access
@@ -98,6 +99,17 @@ setup_zsh_for_user() {
         echo "ℹ️  oh-my-zsh already installed for $username, skipping..."
         # Still fix permissions if already exists
         chmod -R g-w "/home/$username/.oh-my-zsh"
+    fi
+
+    # Initialize conda for zsh and activate base environment
+    # If you want another env from jupyter (e.g. pytorch) you may want to modify or delete this block
+    if [ -f "/opt/conda/bin/conda" ]; then
+        echo "🐍 Initializing conda for $username..."
+        su - "$username" -c '/opt/conda/bin/conda init zsh 2>/dev/null || true'
+        # Ensure base environment is activated by default (only add if not already present)
+        if ! su - "$username" -c 'grep -q "^conda activate base" ~/.zshrc 2>/dev/null'; then
+            su - "$username" -c 'echo "conda activate base" >> ~/.zshrc'
+        fi
     fi
 
     # Change theme to fox

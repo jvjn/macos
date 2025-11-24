@@ -41,18 +41,18 @@ cwb() {
   if [ -z "$1" ]; then
     echo "Usage: cwb INSTANCE_NAME"
     echo "Available workspaces:"
-    ls -1 ~/cursor/vertex_workbench/*.code-workspace 2>/dev/null | xargs -n 1 basename | sed 's/.code-workspace$//'
+    ls -1 ~/.cursor/workspaces/vertex_workbench/*.code-workspace 2>/dev/null | xargs -n 1 basename | sed 's/.code-workspace$//'
     return 1
   fi
   
   local instance_name=$1
-  local workspace_file=~/cursor/vertex_workbench/"$instance_name".code-workspace
+  local workspace_file=~/.cursor/workspaces/vertex_workbench/"$instance_name".code-workspace
   
   if [ ! -f "$workspace_file" ]; then
     echo "❌ Error: Workspace file not found: $workspace_file"
     echo ""
     echo "Available workspaces:"
-    ls -1 ~/cursor/vertex_workbench/*.code-workspace 2>/dev/null | xargs -n 1 basename | sed 's/.code-workspace$//'
+    ls -1 ~/.cursor/workspaces/vertex_workbench/*.code-workspace 2>/dev/null | xargs -n 1 basename | sed 's/.code-workspace$//'
     return 1
   fi
   
