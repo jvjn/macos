@@ -26,3 +26,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Added by tec agent
 [[ -x /Users/jn/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/jn/.local/state/tec/profiles/base/current/global/init zsh)"
+# Ensure Homebrew is in PATH
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh

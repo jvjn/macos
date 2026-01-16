@@ -1,6 +1,9 @@
+alias ls="ls -lGha"
+
 # Google Cloud Platform configuration aliases
 alias gcp-project="gcloud config set project $GCLOUD_DEFAULT_PROJECT"
 alias gcp-account="gcloud config set account $GCLOUD_DEFAULT_ACCOUNT"
+alias gcp-auth="gcloud auth application-default login --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/bigquery"
 
 
 # dbt aliases
