@@ -24,9 +24,10 @@ plugins=(git gcloud macos sublime gcloud-vertex-workbench)
 
 source $ZSH/oh-my-zsh.sh
 
-# Added by tec agent
-[[ -x /Users/jn/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/jn/.local/state/tec/profiles/base/current/global/init zsh)"
-# Ensure Homebrew is in PATH
+# Homebrew (should come FIRST)
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# tec profile (should come AFTER Homebrew)
+[[ -x /Users/jn/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/jn/.local/state/tec/profiles/base/current/global/init zsh)"
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh

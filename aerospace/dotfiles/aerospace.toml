@@ -259,3 +259,7 @@ run = 'move-node-to-workspace C'
     alt-shift-j = ['join-with down', 'mode main']
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
+    ctrl-alt-left = 'join-with left'
+    ctrl-alt-down = 'join-with down'
+    ctrl-alt-up = 'join-with up'
+    ctrl-alt-right = 'join-with right'
